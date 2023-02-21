@@ -8,20 +8,24 @@ function [BAM_config, BAM_data, app] = fn_initialize(app)
     wrong_txt=[];
     %% check what dataset we have
     try
+        app.SavingLampLabel.Text='Load Dataset Success';
         all_dataset = dir([BAM_config.img_vault,'/*mat']);
         dataset_name = {};
         for ii = 1:length(all_dataset)
             dataset_name{end+1} = all_dataset(ii).name(1:end-4);
         end
         app.SelectSet.Items = dataset_name;
-        app.SelectSet.Value = 'FOB';
+        app.SelectSet.Value = 'face';
         
-        app.SavingLampLabel.Text='Load Dataset Success';
+        
         pause(Wait_interval)
     catch
         wrong_txt = 'Load Dataset Wrong';
     end
 
+    %%
+    app.SavingLampLabel.Text='Adding AO Path';
+    addpath(genpath(BAM_config.AO_dir))
     %% set electrode
     [BAM_config BAM_data, app] = fN_assign_electrode(BAM_config, BAM_data, app);
 
@@ -37,6 +41,9 @@ function [BAM_config, BAM_data, app] = fn_initialize(app)
     [BAM_config,BAM_data, app] = fN_ao_connect(BAM_config, BAM_data, app);
     if(~BAM_config.IP.Connected)
         wrong_txt='Fail to Connect to AO';
+    end
+    if(~BAM_config.IP.Buffered)
+        wrong_txt='Fail to Buffer';
     end
     %%
     if(isempty(wrong_txt))
