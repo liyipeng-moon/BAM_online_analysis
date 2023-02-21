@@ -23,7 +23,11 @@ for cc = 1:BAM_config.MaxElectrode
 end
 BAM_config.num_unit_used = 0;
 
-
+%% SR
+BAM_config.SR.DIO=44000;
+BAM_config.SR.SEG=44000;
+BAM_config.SR.LFP=1375;
+BAM_config.SR.AI=2750;
 %% AO IP Address
 BAM_config.IP.DSPMAC = 'A8:1B:6A:21:24:4B';
 BAM_config.IP.PCMAC = 'bc:6a:29:e1:49:bf';

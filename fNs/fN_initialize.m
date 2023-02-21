@@ -55,6 +55,7 @@ function [BAM_config, BAM_data, app] = fn_initialize(app)
         app.SavingLampLabel.Text=wrong_txt;
         app.SavingLamp.Color = BAM_config.colormap.white;
     end
-
-    
+    temp =  strrep(datestr(datetime), ' ', '_');
+    BAM_config.today = temp(1:11);
+    mkdir(['data/' BAM_config.today])
 end
