@@ -38,6 +38,7 @@ function [BAM_data, location_progress] = fN_minium_prep(BAM_config, BAM_data, pd
                         BAM_data.big_EYE2_train = fN_stack_array(BAM_data.big_EYE2_train, EYE_data);
                         BAM_data.big_EYE2_time = fN_stack_array(BAM_data.big_EYE2_time, EYE_time);
                         location_progress(preprocessed_channel) = BAM_data.big_EYE2_time.location-1;
+                    % when adding more electrode, adding field to BMA_data
                 end
             end
         end

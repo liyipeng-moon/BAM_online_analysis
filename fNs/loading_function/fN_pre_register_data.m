@@ -11,6 +11,7 @@ eye_memory_per_reading = floor(BAM_config.read_interval*BAM_config.SR.AI*1.1);
 eye_memory_times_reading = floor(BAM_config.save_interval/BAM_config.read_interval);
 spk_memory = 3000;
     % seg1
+    % can we change this to a function?
     if(BAM_config.ElectrodeUsing(1))
         % % LFP
         BAM_data.big_LFP1_train.val=nan([lfp_memory_times_reading,lfp_memory_per_reading]);BAM_data.big_LFP1_train.location=1;

@@ -6,7 +6,7 @@ function [BAM_config,BAM_data, app] = fN_saving(BAM_config, BAM_data, app)
     %% adding event code
     BAM_data.interedted_channel_idx=fN_find_channel_idx(BAM_config,'eventcode');
     BAM_data.ChannelName{end+1} = 'EventCode';
-    %% adding electrode
+    %% adding electrode, shall we change this to a function?
     if(app.ChannelUsingLFP1.Value)
         BAM_data.interedted_channel_idx=[BAM_data.interedted_channel_idx, fN_find_channel_idx(BAM_config,'lfp1'),fN_find_channel_idx(BAM_config,'seg1')];
         BAM_data.ChannelName{end+1} = 'LFP1';
@@ -26,7 +26,6 @@ function [BAM_config,BAM_data, app] = fN_saving(BAM_config, BAM_data, app)
     BAM_data.Dataset = app.SelectSet.Value;
     
     %% generate fake variable for storing data
-
     [BAM_data, max_save_memory] = fN_pre_register_data(BAM_config,BAM_data,app);
 
     % generate data capture table

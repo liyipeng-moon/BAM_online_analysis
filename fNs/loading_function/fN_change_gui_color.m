@@ -1,5 +1,6 @@
 function app = fN_change_gui_color(app,BAM_config,BAM_data)
 %% about saving
+% you dont need do modify this code when adding channel
 if(BAM_config.is_saving)
 
     app.StartOnlineSavingButton.FontColor = BAM_config.colormap.white;
