@@ -32,47 +32,58 @@ function [BAM_config,BAM_data, app] = fN_saving(BAM_config, BAM_data, app)
 
     app.DataCapture.Data = table(BAM_data.ChannelName',zeros([1,length(BAM_data.interedted_channel_idx)])',zeros([1,length(BAM_data.interedted_channel_idx)])', max_save_memory','VariableNames',{'Channel','DataCapture', 'Valid Data','Memory'});
 
-
     pdata=zeros(length(BAM_data.interedted_channel_idx),20000);
     datacapture=zeros([1,length(BAM_data.interedted_channel_idx)]);
     datacapture_history = zeros([1,length(BAM_data.interedted_channel_idx)]);
 
     saving_time = GetSecs;
+    load_interval_measure = GetSecs;
+    AO_ClearChannelData();
+    while(GetSecs-load_interval_measure<BAM_config.read_interval)    
+    end
+    load_interval_measure=GetSecs;
+    delay_time = 0;
+
+
     while(1)
         if(app.StartOnlineSavingButton.Enable)
             disp('stopped')
             [BAM_data] = fN_save_file(BAM_config,BAM_data,app);
             break
         end
-        
-        AO_ClearChannelData();
-
-        pause(BAM_config.read_interval)
-
+            tic
             for ii = 1:length(BAM_data.interedted_channel_idx)
-                interested_channel = BAM_data.interedted_channel_idx(ii);
-                [~,pdata(ii,:),datacapture(ii)] = AO_GetChannelData(interested_channel);
+                [~,pdata(ii,:),datacapture(ii)] = AO_GetChannelData(BAM_data.interedted_channel_idx(ii));
             end
+            delay_time = delay_time + toc;
+
+            AO_ClearChannelData();
+
             datacapture_history = max(datacapture_history,datacapture);
 
             [BAM_data, location_progress] = fN_minium_prep(BAM_config,BAM_data, pdata,datacapture);
+
             app.DataCapture.Data(:,2) = table(datacapture_history');
             app.DataCapture.Data(:,3) = table(location_progress');
+            pause(BAM_config.read_interval/10)
+            
+            [BAM_config, BAM_data, app, new_dataset] = fN_update_dataset(BAM_config, BAM_data, app);
+            if(new_dataset)
+                while(GetSecs-load_interval_measure<BAM_config.read_interval)    
+                end
+                continue;
+            end
 
         if(GetSecs-saving_time>BAM_config.save_interval)
-            app.delay_measurement.Text = ['take ' ,num2str(GetSecs-saving_time), 's to read data for ' ,num2str(BAM_config.save_interval), 's'];
+            app.delay_measurement.Text = ['miss ' ,num2str(1000*delay_time), 'ms to read data for ' ,num2str(BAM_config.save_interval), 's'];
             [BAM_data] = fN_save_file(BAM_config,BAM_data,app);
             saving_time=GetSecs;
+            delay_time=0;
         end
+
+        while(GetSecs-load_interval_measure<BAM_config.read_interval)    
+        end
+        load_interval_measure=GetSecs;
     end
-
 end
 
-function [BAM_data] = fN_save_file(BAM_config,BAM_data,app)
-    temp =  strrep(datestr(datetime), ':', '_');
-    file_name = ['data/',BAM_config.today, '/uncheck_', temp(13:end),'.mat'];
-    save(file_name,'BAM_data')
-    cc_name = ['data/',BAM_config.today, '/config.mat'];
-    save(cc_name,'BAM_config')
-    BAM_data = fN_pre_register_data(BAM_config,BAM_data,app);
-end

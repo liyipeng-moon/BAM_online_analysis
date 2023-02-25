@@ -2,14 +2,14 @@ function [BAM_data, max_save_memory] = fn_pre_register_data(BAM_config,BAM_data,
     % event code
     BAM_data.big_ev_train.val=nan([1,200]);BAM_data.big_ev_train.location=1;
     BAM_data.big_ev_time.val=nan([1,200]);BAM_data.big_ev_time.location=1;
-    max_save_memory = [200];
+    max_save_memory = [BAM_config.save_interval*15];
 
 
 lfp_memory_per_reading = floor(BAM_config.read_interval*BAM_config.SR.LFP*1.1);
-lfp_memory_times_reading = floor(BAM_config.save_interval/BAM_config.read_interval);
+lfp_memory_times_reading = floor(BAM_config.save_interval/BAM_config.read_interval)+1;
 eye_memory_per_reading = floor(BAM_config.read_interval*BAM_config.SR.AI*1.1);
-eye_memory_times_reading = floor(BAM_config.save_interval/BAM_config.read_interval);
-spk_memory = 3000;
+eye_memory_times_reading = floor(BAM_config.save_interval/BAM_config.read_interval)+1;
+spk_memory = floor([eye_memory_times_reading*1.2*20000/103]);
     % seg1
     % can we change this to a function?
     if(BAM_config.ElectrodeUsing(1))

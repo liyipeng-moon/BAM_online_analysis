@@ -9,6 +9,5 @@ else
     % which means we stack input to a matrix
     data_array.val(data_array.location, 1:length(inputs))=inputs;
     data_array.location = data_array.location + 1;
-    
 end
 end
