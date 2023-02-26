@@ -37,6 +37,7 @@ BAM_config.IP.Buffered=0;
 BAM_config.is_saving=0;
 BAM_config.save_interval = 5;
 BAM_config.read_interval = 0.3;
+BAM_config.combine_interval = 0.3;
 % add channel
 BAM_config.channelidarr = [10000,10128,10001,10129,11202,11016,11017,11020];
 BAM_config.channel_name = {'lfp1','seg1','lfp2','seg2','eventcode','ai1','ai2','ai5'};

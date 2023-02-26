@@ -1,5 +1,5 @@
-function [BAM_analysis, app]=fN_combine_mat(today_name,root_dir, app)
-    BAM_analysis.folder_today = [root_dir, 'data\',today_name, '*'];
+function [BAM_config, BAM_analysis, app]=fN_combine_mat(BAM_config, BAM_analysis, app)
+    BAM_analysis.folder_today = [BAM_config.root_dir, 'data\',BAM_config.today_name, '*'];
     BAM_analysis.all_session = dir(BAM_analysis.folder_today);
 
     for ses = 1:length(BAM_analysis.all_session)
@@ -29,12 +29,10 @@ function [BAM_analysis, app]=fN_combine_mat(today_name,root_dir, app)
             % adding temp mat to combined mat
             combined_data = fN_prep_and_stack_data(combined_data, temp_bam_data);
 
-
             file_name = all_uncheck(mat_idx).name;
             eval(['!rename',' , ', fullfile(ses_folder, all_uncheck(mat_idx).name) ' ,' file_name(3:end) ])
         end
-    
-    
+        save(fullfile(ses_folder, 'combined_data.mat'), "combined_data")
     
     end
 
