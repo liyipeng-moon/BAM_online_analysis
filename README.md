@@ -20,3 +20,5 @@ Developer: LiYipeng-Moon
 __fN_pre_register_data__. check the max memory for each digital channel, especially SEG channel()
 __fN_miniun_prep__. Change electrode channel initialization and storing.
 sync file between online-analysis PC and Monkeylogic PC
+ 
+seems that the unit id in bam_data.electrode is not refreshed during experiment, fixing...
