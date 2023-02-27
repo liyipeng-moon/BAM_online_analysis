@@ -44,7 +44,7 @@ BAM_config.channel_name = {'lfp1','seg1','lfp2','seg2','eventcode','ai1','ai2','
 
 %% about online analysis
 BAM_config.session_buffer = 5000; % in ms
-BAM_config.combine_interval = 0.1;
+BAM_config.combine_interval = 0.05;
 BAM_config.session_max_length = 10 * 60 * 1000;
 %% color parameters
 BAM_config.colormap.red = [1,0,0];

@@ -20,7 +20,7 @@ for ii = 1:min(length(EYEx), length(EYEy))
     heat_now(EYEx(ii), EYEy(ii)) = heat_now(EYEx(ii), EYEy(ii))+1;
 end
 heat_now = heat_now./max(heat_now(:));
-thres = app.ThresholdSpinner.Value;
+thres = app.WinSizeSpinner.Value;
 window_idx = ((abs(eye_xgrid-cx)==thres & abs(eye_ygrid-cy)<thres) | (abs(eye_ygrid-cy)==thres & abs(eye_xgrid-cx)<thres));
 heat_now(window_idx)=1;
 heat_now(cx,cy)=1.3;
@@ -35,10 +35,7 @@ tr_eye2 = round((combined_data.EYE2+5)*10);
 
 
 with_in_window_idx = abs(tr_eye2-cy)<=thres & abs(tr_eye1-cx)<=thres;
-valid_series = zeros(size(tr_eye2));
-combined_data.valid_series(with_in_window_idx)=1;
-
-app.ValidTrialGauge.Limits=[0, 120];
-app.ValidTrialGauge.Value=(sum(valid_series)/length(find(~isnan(tr_eye2) | ~isnan(tr_eye1))))*100*1.2;
+combined_data.valid_time_series = zeros(size(tr_eye2));
+combined_data.valid_time_series(with_in_window_idx)=1;
 
 

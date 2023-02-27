@@ -14,7 +14,10 @@ app.SessionTimeLabel.Text=['session progress ' num2str(BAM_config.session_max_le
 
 % condition stats
 
-
 [combined_data, BAM_config, BAM_analysis, app] = fN_find_valid_trial(combined_data, BAM_config, BAM_analysis, app);
+
+pause(0.05)
+combined_data.ev_train(combined_data.valid_onset)
+combined_data.ev_time(combined_data.valid_onset)
 
 end
