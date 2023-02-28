@@ -40,5 +40,5 @@ function [BAM_config, BAM_analysis, app]=fN_combine_mat(BAM_config, BAM_analysis
     end
 
     app.SelectSession.Items = BAM_analysis.dataset;
-
+    app.SelectSession.Value = BAM_analysis.dataset{3};
 end

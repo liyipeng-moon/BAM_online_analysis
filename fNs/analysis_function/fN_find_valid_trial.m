@@ -2,7 +2,6 @@ function[combined_data, BAM_config, BAM_analysis, app] = fN_find_valid_trial(com
 
 combined_data = fN_summary_eye(combined_data, app);
 
-
 %find onset
 img_ev_idx = find(combined_data.ev_train>10000); % this is the location in event train
 stimuli_idx = combined_data.ev_train(img_ev_idx); % this is the ev value

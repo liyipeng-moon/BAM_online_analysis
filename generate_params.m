@@ -1,4 +1,5 @@
 BAM_config.img_vault = 'F:\Preload\Img_vault\matfile_pool';
+
 BAM_config.AO_dir = 'C:\Program Files (x86)\AlphaOmega\AlphaLab SNR System SDK\MATLAB_SDK';
 BAM_data=[];
 
