@@ -17,8 +17,15 @@ app.SessionTimeLabel.Text=['session progress ' num2str(BAM_config.session_max_le
 [combined_data, BAM_config, BAM_analysis, app] = fN_find_valid_trial(combined_data, BAM_config, BAM_analysis, app);
 
 pause(0.05)
-combined_data.ev_train(combined_data.valid_onset);
-combined_data.ev_time(combined_data.valid_onset);
-
+combined_data.ev_train(combined_data.valid_onset)
+combined_data.ev_time(combined_data.valid_onset)
+keyboard
+if(app.BarButton.Value)
+    app.BarStart.Editable=1;
+    app.EndStart.Editable=1;
+else
+        ~app.BarStart.Editable=1;
+    app.EndStart.Editable=1;
+end
 
 end

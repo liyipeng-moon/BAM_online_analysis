@@ -18,8 +18,9 @@ for field_now = 1:length(all_avai_data)
                 spk_data = getfield(temp_bam_data, field_name); % spk data
                 field_name = all_avai_data{field_now+1};
                 spk_time = getfield(temp_bam_data, field_name); % spk time
-                electrode_config = temp_bam_data.Electrode(str2num(field_name(8)),:);
-                combined_data = fN_assign_spk_data(combined_data, spk_data, spk_time, electrode_config, first_time);
+                electrode_idx = str2num(field_name(8));
+                electrode_config = temp_bam_data.Electrode(electrode_idx,:);
+                combined_data = fN_assign_spk_data(combined_data, spk_data, spk_time, electrode_config, first_time, electrode_idx);
                 continue_flag = 1;
             otherwise % lfp of eye
                 ai_data = getfield(temp_bam_data, field_name);

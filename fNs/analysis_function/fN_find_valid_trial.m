@@ -24,9 +24,11 @@ for img = 1:length(onset_idx)
     valid_img(img) = sum(eye_within_onset)/length(eye_within_onset)>time_thres;
 end
 
-app.ValidTrialGauge.Value = sum(valid_img);
-app.ValidTrialGauge.Limits = [1,length(valid_img)];
-app.ValidTrialGauge.MajorTicks = [1, floor([0.25,0.5,0.75,1]*length(valid_img))];
+show_valid_txt = ['Valid Trial: ', num2str(sum(valid_img)), '/' num2str(length(valid_img))];
+app.ValidTrialLabel.Text = show_valid_txt;
+% app.ValidTrialGauge.Value = ;
+% app.ValidTrialGauge.Limits = [1,length(valid_img)];
+% app.ValidTrialGauge.MajorTicks = [1, floor([0.25,0.5,0.75,1]*length(valid_img))];
 
 combined_data.valid_onset = onset_idx(find(valid_img));
 combined_data.valid_onset;

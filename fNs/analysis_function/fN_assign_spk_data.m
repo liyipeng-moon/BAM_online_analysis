@@ -1,4 +1,4 @@
-function combined_data = fN_assign_spk_data(combined_data, spk_data, spk_time, electrode_config, first_time)
+function combined_data = fN_assign_spk_data(combined_data, spk_data, spk_time, electrode_config, first_time, electrode_idx)
 
 if(spk_data.location==1)
     % which means there is no spike during saving_interval
@@ -22,5 +22,9 @@ all_unit(all_unit==0)=[];
         else
             combined_data.spk(unit_id).location = [combined_data.spk(unit_id).location, time_of_spike];
         end
+        combined_data.spk(unit_id).electrode = electrode_idx;
     end
+    
+
+
 end
