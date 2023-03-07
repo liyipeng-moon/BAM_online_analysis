@@ -1,5 +1,9 @@
 # BAM_online_analysis
 
+This software is currently under development and the official version can be found at [BAM_Online_Analysis_v2](https://github.com/liyipeng-moon/BAM_Online_Analysis_v2). 
+
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 BAM(Blab Alphaomega for Monkey), is used for loading AlphaOmega online data and perform simple analyses during experiments. The current version supports a maximum of two electrodes.
 
 Developer: LiYipeng-Moon 
